@@ -9,7 +9,7 @@ import os
 
 def menu2():
     print("""
-            Elija la accion que desea realizar:\n
+            Elija el código que desea utilizar:\n
             Menu:\n
             1. UPC.\n
             2. ISBN-10.\n
