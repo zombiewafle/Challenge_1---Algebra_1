@@ -7,6 +7,32 @@
 
 import os
 
+
+"""
+Esto elimina el número de cualquier separador válido y
+elimina los espacios en blanco circundantes.
+"""
+def compact(number):
+    return clean(number, ' -').strip()
+
+"""
+Comprueba si el codigo proporcionado es válido,
+esto verifica la longitud.
+"""
+
+def validate(number):
+    number = compact(number)
+    if not isdigits(number):
+        raise InvalidFormat()
+    if len(number) not in (14, 13, 12, 8):
+        raise InvalidLength()
+    if calc_check_digit(number[:-1]) != number[-1]:
+        raise InvalidChecksum()
+    return number
+"donde esta (14, 13, 12, 8) es donde va el largo del codigo"
+
+
+
 def menu2():
     print("""
             Elija el código que desea utilizar:\n
