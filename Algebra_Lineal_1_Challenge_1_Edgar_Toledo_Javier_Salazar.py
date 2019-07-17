@@ -2,7 +2,7 @@
 #Fecha de entrega: 17/07/19
 #Descripcion: Este programa es un validador y
 #calculador de digitos de control de codigos UPC,
-#ISBN-10, ISBN-13, NIT y Codabar
+#ISBN-10, ISBN-13, NIT, UPC y Codabar
 
 
 import os
