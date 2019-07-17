@@ -8,6 +8,86 @@
 import os
 from itertools import cycle
 
+import re
+#--------------------------------------------------------------------------------
+def calcCheckDigitForISBN10( ISBN_10 ):
+
+    result = -1
+    
+    sum = 0
+    ISBN_10 = ISBN_10[::-1] # reverse string
+    for i in range(len(ISBN_10)):
+        digit = int(ISBN_10[i])
+        sum += digit * (i + 2)
+
+    result = (11 - sum % 11) % 11
+
+    return result
+
+def calcCheckDigitForISBN13( ISBN_13 ):
+    
+    result = -1
+    
+    sum = 0
+
+    for i in range(len(ISBN_13)):
+        digit = int(ISBN_13[i])
+        sum += digit * (3 if isOdd(i) else 1)
+
+    result = (10 - sum % 10) % 10
+
+    return result
+
+def isOdd( n ): 
+    return n % 2 != 0
+
+
+
+def calcCheckDigitForUPC(UPC):
+    
+    result = -1
+    
+    sum = 0
+
+    for i in range(len(UPC)):
+        digit = int(UPC[i])
+        sum += digit * (3 if isOdd(i) else 1)
+
+    result = (10 - sum % 10) % 10
+
+    return result
+
+
+def calcCheckDigitForNIT(NIT):
+    
+    result = -1
+    
+    sum = 0
+
+    for i in range(len(NIT)):
+        digit = int(NIT[i])
+        sum += digit * (3 if isOdd(i) else 1)
+
+    result = (10 - sum % 10) % 10
+
+    return result
+
+def calcCheckDigitForCODABAR(Codabar):
+    
+    result = -1
+    
+    sum = 0
+
+    for i in range(len(Codabar)):
+        digit = int(Codabar[i])
+        sum += digit * (3 if isOdd(i) else 1)
+
+    result = (10 - sum % 10) % 10
+
+    return result
+
+
+#----------------------------------------------------------------------------------
 
 "Verifica si es ISBN-10"
 #ISBN_10 = input('Ingrese el codigo a verificar')
