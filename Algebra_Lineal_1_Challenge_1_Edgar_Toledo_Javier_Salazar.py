@@ -91,7 +91,7 @@ while True:
         opcionMenu2 = input("Inserte un valor >>")
         if opcionMenu2 == "1":
             print("")
-            UPC = input("Ingrese el codigo a verificar")
+            UPC = input("Ingrese el codigo a verificar con el largo correcto segun el codigo si no aparecera como correcto y no se evaluara")
             digito_verificador_UPC(UPC)
             if digito_verificador_UPC(UPC) == 0:
                 print('El codigo es correcto')
@@ -101,7 +101,7 @@ while True:
 
         elif opcionMenu2 == "2":
             print("")
-            ISBN_10 = input("Ingrese el codigo a verificar")
+            ISBN_10 = input("Ingrese el codigo a verificar con el largo correcto segun el codigo si no aparecera como correcto y no se evaluara")
             digito_verificador_ISBN10(ISBN_10)
             if digito_verificador_ISBN10(ISBN_10) == 0:
                 print('El codigo es correcto')
@@ -111,7 +111,7 @@ while True:
 
         elif opcionMenu2 == "3":
             print("")
-            ISBN_13 = input("Ingrese el codigo a verificar")
+            ISBN_13 = input("Ingrese el codigo a verificar con el largo correcto segun el codigo si no aparecera como correcto y no se evaluara")
             digito_verificador_ISBN13(ISBN_13)
             if digito_verificador_ISBN13(ISBN_13) == 0:
                 print('El codigo es correcto')
@@ -121,7 +121,7 @@ while True:
 
         elif opcionMenu2 == "4":
             print("")
-            NIT = input("Ingrese el codigo a verificar")
+            NIT = input("Ingrese el codigo a verificar con el largo correcto segun el codigo si no aparecera como correcto y no se evaluara")
             digito_verificador_NIT(NIT)
             if digito_verificador_NIT(NIT) == 0:
                 print('El codigo es correcto')
@@ -130,7 +130,7 @@ while True:
             print("\n.....")
 
         elif opcionMenu2 == "5":
-            Codabar = input("Ingrese el codigo a verificar")
+            Codabar = input("Ingrese el codigo a verificar con el largo correcto segun el codigo si no aparecera como correcto y no se evaluara")
             digito_verificador_Codabar(Codabar)
             if digito_verificador_Codabar(Codabar) == 0:
                 print('El codigo es correcto')
