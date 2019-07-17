@@ -203,27 +203,27 @@ while True:
             print("")
             UPC = input("Ingrese el codigo a verificar y validar")
             verify_UPC(UPC)
-            validate_UPC(UPC)
+            #validate_UPC(UPC)
             print("\n.....")
 
         elif opcionMenu2 == "2":
             verify_ISBN_10(ISBN_10)
-            validate_ISBN_10(ISBN_10)
+            #validate_ISBN_10(ISBN_10)
             print("\n.....")
 
         elif opcionMenu2 == "3":
             verify_ISBN_13(ISBN_13)
-            validate_ISBN_13(ISBN_13)
+            #validate_ISBN_13(ISBN_13)
             print("\n.....")
 
         elif opcionMenu2 == "4":
             verify_NIT(NIT)
-            validate_NIT(NIT)
+            #validate_NIT(NIT)
             print("\n.....")
 
         elif opcionMenu2 == "5":
             verify_Codabar(Codabar)
-            validate_Codabar(Codabar)
+            #validate_Codabar(Codabar)
             print("\n.....")
 
         elif opcionMenu2 == "6":
