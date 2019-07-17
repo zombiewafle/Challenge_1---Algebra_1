@@ -7,22 +7,6 @@
 
 import os
 
-"Verifica si es ISBN"
-def verify(isbn):
-    isbn = input("Ingrese el isbn")
-    counter = 1
-    total = 0
-    for d in reversed(isbn):
-        if d is 'X':
-            if counter != 1:
-                return False
-            d = '10'
-        if d.isdigit():
-            total += int(d) * counter
-            counter += 1
-    return counter == 11 and total % 11 == 0
-
-
 
 """
 Esto elimina el número de cualquier separador válido y
@@ -36,18 +20,62 @@ Comprueba si el codigo proporcionado es válido,
 esto verifica la longitud.
 """
 
-def validate(number):
+def validateISBN_13(number):
     number = compact(number)
     if not isdigits(number):
         raise InvalidFormat()
-    if len(number) not in (14, 13, 12, 8):
+    if len(number) not in (13):
         raise InvalidLength()
     if calc_check_digit(number[:-1]) != number[-1]:
         raise InvalidChecksum()
     return number
-"donde esta (14, 13, 12, 8) es donde va el largo del codigo"
+"donde esta (13) es donde va el largo del codigo"
 
+def validateISBN_10(number):
+    number = compact(number)
+    if not isdigits(number):
+        raise InvalidFormat()
+    if len(number) not in (10):
+        raise InvalidLength()
+    if calc_check_digit(number[:-1]) != number[-1]:
+        raise InvalidChecksum()
+    return number
+"donde esta (10) es donde va el largo del codigo"
 
+def validate_NIT(number):
+    number = compact(number)
+    if not isdigits(number):
+        raise InvalidFormat()
+    if len(number) not in (10):
+        raise InvalidLength()
+    if calc_check_digit(number[:-1]) != number[-1]:
+        raise InvalidChecksum()
+    return number
+"donde esta (10) es donde va el largo del codigo"
+
+def validate_UPC(number):
+    number = compact(number)
+    if not isdigits(number):
+        raise InvalidFormat()
+    if len(number) not in (13,10):
+        raise InvalidLength()
+    if calc_check_digit(number[:-1]) != number[-1]:
+        raise InvalidChecksum()
+    return number
+"donde esta (13,10) es donde va el largo del codigo"
+
+def validate_Codabar(number):
+    number = compact(number)
+    if not isdigits(number):
+        raise InvalidFormat()
+    if len(number) not in (1,2,3,4,5,6,7,8,9,10,11,12,13,14):
+        raise InvalidLength()
+    if calc_check_digit(number[:-1]) != number[-1]:
+        raise InvalidChecksum()
+    return number
+"donde esta (1,2,3,4,5,6,7,8,9,10,11,12,13,14) es donde va el largo del codigo"
+
+#-----------------------------------------------------------------
 
 def menu2():
     print("""
