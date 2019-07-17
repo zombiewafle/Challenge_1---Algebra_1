@@ -6,13 +6,17 @@
 
 
 import os
+#isbn_10 = input("Ingrese el isbn-10")
+#isbn_13 = input("Ingrese el isbn-13")
+#UPC= input("Ingrese el UPC")
+#nit = input("Ingrese el NIT")
+#codabar = input("Ingrese el Codabar")
 
 "Verifica si es ISBN-10"
-def verify_ISBN_10(isbn_10):
-    isbn_10 = input("Ingrese el isbn-10")
+def verify_ISBN_10(ISBN_10):
     counter = 1
     total = 0
-    for d in reversed(isbn_10):
+    for d in reversed(ISBN_10):
         if d is 'X':
             if counter != 1:
                 return False
@@ -23,11 +27,10 @@ def verify_ISBN_10(isbn_10):
     return counter == 11 and total % 11 == 0
 
 "Verifica si es ISBN-13"
-def verify_ISBN_13(isbn_13):
-    isbn_13 = input("Ingrese el isbn-13")
+def verify_ISBN_13(ISBN_13):
     counter = 1
     total = 0
-    for d in reversed(isbn_13):
+    for d in reversed(ISBN_13):
         if d is 'X':
             if counter != 1:
                 return False
@@ -35,11 +38,10 @@ def verify_ISBN_13(isbn_13):
         if d.isdigit():
             total += int(d) * counter
             counter += 1
-    return counter == 11 and total % 11 == 0
+    return counter == 13 and total % 13 == 0
 
 "Verifica si es UPC"
 def verify_UPC(UPC):
-    UPC= input("Ingrese el UPC")
     counter = 1
     total = 0
     for d in reversed(UPC):
@@ -50,14 +52,13 @@ def verify_UPC(UPC):
         if d.isdigit():
             total += int(d) * counter
             counter += 1
-    return counter == 11 and total % 11 == 0
+    return counter == 10 and total % 10 == 0
 
 "Verifica si es NIT"
-def verify_NIT(nit):
-    nit = input("Ingrese el NIT")
+def verify_NIT(NIT):
     counter = 1
     total = 0
-    for d in reversed(nit):
+    for d in reversed(NIT):
         if d is 'X':
             if counter != 1:
                 return False
@@ -65,14 +66,13 @@ def verify_NIT(nit):
         if d.isdigit():
             total += int(d) * counter
             counter += 1
-    return counter == 11 and total % 11 == 0
+    return counter == 10 and total % 10 == 0
 
 "Verifica si es Codabar"
-def verify_Codabar(codabar):
-    codabar = input("Ingrese el Codabar")
+def verify_Codabar(Codabar):
     counter = 1
     total = 0
-    for d in reversed(codabar):
+    for d in reversed(Codabar):
         if d is 'X':
             if counter != 1:
                 return False
@@ -80,9 +80,9 @@ def verify_Codabar(codabar):
         if d.isdigit():
             total += int(d) * counter
             counter += 1
-    return counter == 11 and total % 11 == 0
+    return counter == 16 and total % 16 == 0
 
-
+#-------------------------------------------------------------------------------
 
 
 """
@@ -90,38 +90,50 @@ Esto elimina el número de cualquier separador válido y
 elimina los espacios en blanco circundantes.
 """
 
-def compact(number):
-    return clean(number, ' -').strip()
+def compact_13(ISBN_13):
+    return clean(ISBN_13, ' -').strip()
 
+def compact_10(ISBN_10):
+    return clean(ISBN_10, ' -').strip()
+
+def compact_NIT(NIT):
+    return clean(NIT, ' -').strip()
+
+def compact_UPC(UPC):
+    return clean(UPC, ' -').strip()
+
+def compact_Codabar(Codabar):
+    return clean(Codabar, ' -').strip()
+#-------------------------------------------------------------------------
 """
 Comprueba si el codigo proporcionado es válido,
 esto verifica la longitud.
 """
 
-def validateISBN_13(number):
-    number = compact(number)
-    if not isdigits(number):
+def validateISBN_13(ISBN_13):
+    ISBN_13 = compact_13(ISBN_13)
+    if not isdigits(ISBN_13):
         raise InvalidFormat()
-    if len(number) not in (13):
+    if len(ISBN_13) not in (13):
         raise InvalidLength()
-    if calc_check_digit(number[:-1]) != number[-1]:
+    if calc_check_digit(ISBN_13[:-1]) != ISBN_13[-1]:
         raise InvalidChecksum()
-    return number
+    return ISBN_13
 "donde esta (13) es donde va el largo del codigo"
 
-def validate_ISBN_10(number):
-    number = compact(number)
-    if not isdigits(number):
+def validate_ISBN_10(ISBN_10):
+    ISBN_10 = compact_10(ISBN_10)
+    if not isdigits(ISBN_10):
         raise InvalidFormat()
-    if len(number) not in (10):
+    if len(ISBN_10) not in (10):
         raise InvalidLength()
-    if calc_check_digit(number[:-1]) != number[-1]:
+    if calc_check_digit(ISBN_10[:-1]) != ISBN_10[-1]:
         raise InvalidChecksum()
-    return number
+    return ISBN_10
 "donde esta (10) es donde va el largo del codigo"
 
 def validate_NIT(number):
-    number = compact(number)
+    number = compact_NIT(number)
     if not isdigits(number):
         raise InvalidFormat()
     if len(number) not in (10):
@@ -131,26 +143,26 @@ def validate_NIT(number):
     return number
 "donde esta (10) es donde va el largo del codigo"
 
-def validate_UPC(number):
-    number = compact(number)
-    if not isdigits(number):
+def validate_UPC(UPC):
+    UPC = compact_UPC(UPC)
+    if not isdigits(UPC):
         raise InvalidFormat()
-    if len(number) not in (13,10):
+    if len(UPC) not in (13,10):
         raise InvalidLength()
-    if calc_check_digit(number[:-1]) != number[-1]:
+    if calc_check_digit(UPC[:-1]) != UPC[-1]:
         raise InvalidChecksum()
-    return number
+    return UPC
 "donde esta (13,10) es donde va el largo del codigo"
 
-def validate_Codabar(number):
-    number = compact(number)
-    if not isdigits(number):
+def compact_Codabar(Codabar):
+    Codabar = compact(Codabar)
+    if not isdigits(Codabar):
         raise InvalidFormat()
-    if len(number) not in (1,2,3,4,5,6,7,8,9,10,11,12,13,14):
+    if len(Codabar) not in (1,2,3,4,5,6,7,8,9,10,11,12,13,14):
         raise InvalidLength()
-    if calc_check_digit(number[:-1]) != number[-1]:
+    if calc_check_digit(Codabar[:-1]) != Codabar[-1]:
         raise InvalidChecksum()
-    return number
+    return Codabar
 "donde esta (1,2,3,4,5,6,7,8,9,10,11,12,13,14) es donde va el largo del codigo"
 
 #-----------------------------------------------------------------
@@ -189,28 +201,29 @@ while True:
         opcionMenu2 = input("Inserte un valor >>")
         if opcionMenu2 == "1":
             print("")
-            verify_UPC()
-            validate_UPC()
+            UPC = input("Ingrese el codigo a verificar y validar")
+            verify_UPC(UPC)
+            validate_UPC(UPC)
             print("\n.....")
 
         elif opcionMenu2 == "2":
-            verify_ISBN_10()
-            validate_ISBN_10()
+            verify_ISBN_10(ISBN_10)
+            validate_ISBN_10(ISBN_10)
             print("\n.....")
 
         elif opcionMenu2 == "3":
-            verify_ISBN_13()
-            validate_ISBN_13()
+            verify_ISBN_13(ISBN_13)
+            validate_ISBN_13(ISBN_13)
             print("\n.....")
 
         elif opcionMenu2 == "4":
-            verify_NIT()
-            validate_NIT()
+            verify_NIT(NIT)
+            validate_NIT(NIT)
             print("\n.....")
 
         elif opcionMenu2 == "5":
-            verify_Codabar()
-            validate_Codabar()
+            verify_Codabar(Codabar)
+            validate_Codabar(Codabar)
             print("\n.....")
 
         elif opcionMenu2 == "6":
